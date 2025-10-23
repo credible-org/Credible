@@ -7,19 +7,18 @@ import {VCPackIssuer} from "../src/VCPackIssuer.sol";
 
 contract DeployVCPackIssuerScript is Script {
     // Configuration constants
-    uint256 private constant DEPLOYER_PRIVATE_KEY = 0x1; 
     string private constant BASE_URI = "ipfs://vcp-base-uri-2024/";
 
     function run() public {
         // Get the address corresponding to the deployer private key
-        address deployer = vm.addr(DEPLOYER_PRIVATE_KEY);
+        address deployer = vm.addr(vm.envUint("PRIVATE_KEY"));
 
         console.log("--- VCPackIssuer Deployment Script Started ---");
         console.log("Deployer Address:", deployer);
         console.log("Base URI for ERC1155:", BASE_URI);
 
         // Start broadcasting transactions using the deployer's key
-        vm.startBroadcast(DEPLOYER_PRIVATE_KEY);
+        vm.startBroadcast();
 
         // Deploy the contract, passing the BASE_URI and the deployer (owner) address
         VCPackIssuer issuer = new VCPackIssuer(
