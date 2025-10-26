@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from '../ui/button';
 import { Upload, Loader2, Lock, Cloud, CheckCircle2 } from 'lucide-react';
 import { toast } from 'sonner';
+import lighthouse from '@lighthouse-web3/sdk';
 
 interface SubmitProofModalProps {
   open: boolean;
@@ -22,6 +23,28 @@ export function SubmitProofModal({ open, onClose, milestoneId, onSubmit }: Submi
     }
   };
 
+  const progressCallback = (progressData) => {
+    let percentageDone = 100 - (progressData?.total / progressData?.uploaded)?.toFixed(2);
+    console.log(`Upload progress: ${percentageDone}%`);
+  }
+
+  const uploadFile = async () => {
+    if (!file) {
+      console.error("No file selected.");
+      return;
+    }
+    console.log(import.meta.env.VITE_LIGHTHOUSE_API_KEY)
+    const filesArray = [file];
+    const output = await lighthouse.upload(
+      filesArray,
+      import.meta.env.VITE_LIGHTHOUSE_API_KEY
+    );
+
+    console.log('File uploaded successfully!', output);
+    // The file is now available at the following IPFS gateway URL:
+    console.log('Visit at:', `https://gateway.lighthouse.storage/ipfs/${output.data.Hash}`);
+  }  
+
   const handleSubmit = async () => {
     if (!file) return;
 
@@ -33,7 +56,7 @@ export function SubmitProofModal({ open, onClose, milestoneId, onSubmit }: Submi
 
     // Step 2: Storing
     setUploadStage('storing');
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    uploadFile();
 
     // Step 3: On-chain confirmation
     setUploadStage('confirming');

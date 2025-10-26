@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
+import { ConnectWalletButton } from '@/utils/ConnectWallet';
 
 interface WalletConnectModalProps {
   open: boolean;
@@ -102,42 +103,7 @@ export function WalletConnectModal({ open, onClose, onConnect }: WalletConnectMo
               exit={{ opacity: 0, x: 20 }}
               transition={{ duration: 0.2 }}
             >
-              <Button 
-                variant="ghost" 
-                onClick={handleBack}
-                className="mb-2 -ml-2"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-              </Button>
-
-              <p className="text-muted-foreground">Select your wallet provider:</p>
-              <div className="space-y-3">
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button 
-                    className="w-full justify-start gap-3 h-12"
-                    variant="outline"
-                    onClick={handleWalletProviderSelect}
-                  >
-                    <svg className="h-5 w-5" viewBox="0 0 40 40" fill="none">
-                      <path d="M10 14L18 8L26 14V26L18 32L10 26V14Z" fill="#F6851B" />
-                    </svg>
-                    MetaMask
-                  </Button>
-                </motion.div>
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button 
-                    className="w-full justify-start gap-3 h-12"
-                    variant="outline"
-                    onClick={handleWalletProviderSelect}
-                  >
-                    <svg className="h-5 w-5" viewBox="0 0 40 40" fill="none">
-                      <circle cx="20" cy="20" r="16" fill="#3B99FC" />
-                    </svg>
-                    WalletConnect
-                  </Button>
-                </motion.div>
-              </div>
+              <ConnectWalletButton />
             </motion.div>
           )}
         </AnimatePresence>
