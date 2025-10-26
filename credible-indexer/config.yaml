@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=./node_modules/envio/evm.schema.json
+name: envio-indexer
+networks:
+- id: 11155111
+  start_block: 0
+  contracts:
+  - name: VCPackIssuer
+    address:
+    - 0x715Be93519bc1a92538265C14927589C33bace57
+    handler: src/EventHandlers.ts
+    events:
+    - event: ApprovalForAll(address indexed account, address indexed operator, bool approved)
+    - event: MilestoneApproved(address indexed holder, uint256 indexed packId, uint256 milestoneIndex, string feedback, uint256 newProgress)
+    - event: MilestoneRejected(address indexed holder, uint256 indexed packId, string feedback, uint256 milestoneIndex)
+    - event: MilestoneSubmitted(address indexed holder, uint256 indexed packId, uint256 milestoneIndex, string proofCID)
+    - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
+    - event: PackCreated(uint256 indexed packId, string name, string description, uint256 milestoneCount)
+    - event: PackMilestones(uint256 indexed packId, string indexed id, string title, string description, string required)
+    - event: PackMinted(address indexed holder, uint256 indexed packId)
+    - event: TransferBatch(address indexed operator, address indexed from, address indexed to, uint256[] ids, uint256[] values)
+    - event: TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value)
+    - event: URI(string value, uint256 indexed id)
+unordered_multichain_mode: true
+preload_handlers: true

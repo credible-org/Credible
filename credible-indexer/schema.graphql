@@ -1,0 +1,85 @@
+type VCPackIssuer_ApprovalForAll {
+  id: ID!
+  account: String!
+  operator: String!
+  approved: Boolean!
+}
+
+type VCPackIssuer_MilestoneApproved {
+  id: ID!
+  holder: String!
+  packId: BigInt!
+  milestoneIndex: BigInt!
+  feedback: String!
+  newProgress: BigInt!
+}
+
+type VCPackIssuer_MilestoneRejected {
+  id: ID!
+  holder: String!
+  packId: BigInt!
+  feedback: String!
+  milestoneIndex: BigInt!
+}
+
+type VCPackIssuer_MilestoneSubmitted {
+  id: ID!
+  holder: String!
+  packId: BigInt!
+  milestoneIndex: BigInt!
+  proofCID: String!
+}
+
+type VCPackIssuer_OwnershipTransferred {
+  id: ID!
+  previousOwner: String!
+  newOwner: String!
+}
+
+type VCPackIssuer_PackCreated {
+  id: ID!
+  packId: BigInt!
+  name: String!
+  description: String!
+  milestoneCount: BigInt!
+}
+
+type VCPackIssuer_PackMilestones {
+  id: ID!
+  packId: BigInt!
+  event_id: String!
+  title: String!
+  description: String!
+  required: String!
+}
+
+type VCPackIssuer_PackMinted {
+  id: ID!
+  holder: String!
+  packId: BigInt!
+}
+
+type VCPackIssuer_TransferBatch {
+  id: ID!
+  operator: String!
+  from: String!
+  to: String!
+  ids: [BigInt!]!
+  values: [BigInt!]!
+}
+
+type VCPackIssuer_TransferSingle {
+  id: ID!
+  operator: String!
+  from: String!
+  to: String!
+  event_id: BigInt!
+  value: BigInt!
+}
+
+type VCPackIssuer_URI {
+  id: ID!
+  value: String!
+  event_id: BigInt!
+}
+
