@@ -24,7 +24,7 @@ const ConnectWalletButton = () => {
       setUserAddress(address);
       updateUser({ type:user.type, address: address });
       console.log("Connected with address:", address);
-      navigate("/testing");
+      navigate("/user-select");
     } catch (error) {
       console.error("Error connecting wallet:", error);
     }

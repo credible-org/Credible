@@ -31,11 +31,11 @@ const LandingPage = () => {
   return (
     <div className="pt-20 mx-auto px-4 sm:px-6 lg:px-8">
       <Header />
-      <LogoAndTitle />
+      <LogoAndTitle extra={true} />
       <ConnectWalletButton />
       <div className="flex justify-evenly items-center mt-10">
         {infoCards.map((card) => {
-          return <InfoCards key={ card.id} card={card} />;
+          return <InfoCards key={card.id} card={card} />;
         })}
       </div>
     </div>
